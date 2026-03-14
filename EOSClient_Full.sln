@@ -1,0 +1,56 @@
+
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOSClient", "EOSClient\EOSClient.csproj", "{E17D194C-DB36-44E9-9F08-AD44FB89E2A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionLib", "QuestionLib\QuestionLib.csproj", "{9313F906-A098-4BC5-AE72-646D2C7ED7FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptData", "EncryptData\EncryptData.csproj", "{D87C9558-F9CB-4F14-A534-2EB38E3B70A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRemote", "IRemote\IRemote.csproj", "{D45999C3-9804-4365-84B0-52862D6A3AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerInfoGenerator", "ServerInfoGenerator\ServerInfoGenerator.csproj", "{B7A8C9D0-E1F2-4A3B-9C5D-6E7F8A9B0C1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockExamClient", "MockExamClient\MockExamClient.csproj", "{C1D2E3F4-A5B6-4C7D-8E9F-0A1B2C3D4E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockEOSServer", "MockEOSServer\MockEOSServer.csproj", "{F1E2D3C4-B5A6-4978-8D6E-5F4A3B2C1D0E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E17D194C-DB36-44E9-9F08-AD44FB89E2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17D194C-DB36-44E9-9F08-AD44FB89E2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17D194C-DB36-44E9-9F08-AD44FB89E2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17D194C-DB36-44E9-9F08-AD44FB89E2A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9313F906-A098-4BC5-AE72-646D2C7ED7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9313F906-A098-4BC5-AE72-646D2C7ED7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9313F906-A098-4BC5-AE72-646D2C7ED7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9313F906-A098-4BC5-AE72-646D2C7ED7FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87C9558-F9CB-4F14-A534-2EB38E3B70A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87C9558-F9CB-4F14-A534-2EB38E3B70A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87C9558-F9CB-4F14-A534-2EB38E3B70A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87C9558-F9CB-4F14-A534-2EB38E3B70A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D45999C3-9804-4365-84B0-52862D6A3AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D45999C3-9804-4365-84B0-52862D6A3AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D45999C3-9804-4365-84B0-52862D6A3AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D45999C3-9804-4365-84B0-52862D6A3AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A8C9D0-E1F2-4A3B-9C5D-6E7F8A9B0C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A8C9D0-E1F2-4A3B-9C5D-6E7F8A9B0C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A8C9D0-E1F2-4A3B-9C5D-6E7F8A9B0C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A8C9D0-E1F2-4A3B-9C5D-6E7F8A9B0C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D2E3F4-A5B6-4C7D-8E9F-0A1B2C3D4E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D2E3F4-A5B6-4C7D-8E9F-0A1B2C3D4E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D2E3F4-A5B6-4C7D-8E9F-0A1B2C3D4E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D2E3F4-A5B6-4C7D-8E9F-0A1B2C3D4E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1E2D3C4-B5A6-4978-8D6E-5F4A3B2C1D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1E2D3C4-B5A6-4978-8D6E-5F4A3B2C1D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1E2D3C4-B5A6-4978-8D6E-5F4A3B2C1D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1E2D3C4-B5A6-4978-8D6E-5F4A3B2C1D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

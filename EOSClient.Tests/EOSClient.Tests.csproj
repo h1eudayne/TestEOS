@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>EOSClient.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.9.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Qase.NUnit.Reporter" Version="1.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
+  <!-- Link source files from main projects -->
+  <ItemGroup>
+    <Compile Include="..\MockExamClient\ExamHelper.cs" Link="Sources\ExamHelper.cs" />
+    <Compile Include="..\MockExamClient\CredentialValidator.cs" Link="Sources\CredentialValidator.cs" />
+  </ItemGroup>
+
+  <!-- Copy qase.config.json to output -->
+  <ItemGroup>
+    <None Include="qase.config.json" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
+</Project>
