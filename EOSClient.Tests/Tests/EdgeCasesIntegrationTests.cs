@@ -310,11 +310,7 @@ namespace EOSClient.Tests
 
             var sourceCsv = Path.Combine(
                 Directory.GetCurrentDirectory(), "..", "..", "..", "..", 
-                "MockEOSServer", "bin", "Debug", "questions.csv");
-            
-
-            if (!File.Exists(sourceCsv))
-                sourceCsv = @"d:\EOSClient_source\MockEOSServer\bin\Debug\questions.csv";
+                "MockEOSServer", "questions.csv");
             
             Assert.That(File.Exists(sourceCsv), Is.True, 
                 $"Source questions.csv not found at: {sourceCsv}");
@@ -381,9 +377,7 @@ namespace EOSClient.Tests
 
             var sourceCsv = Path.Combine(
                 Directory.GetCurrentDirectory(), "..", "..", "..", "..", 
-                "MockEOSServer", "bin", "Debug", "questions.csv");
-            if (!File.Exists(sourceCsv))
-                sourceCsv = @"d:\EOSClient_source\MockEOSServer\bin\Debug\questions.csv";
+                "MockEOSServer", "questions.csv");
             
             var csvPath = CreateCsvFile(File.ReadAllText(sourceCsv), "partial_questions.csv");
             var questions = ExamHelper.LoadQuestionsFromCSV(csvPath);
