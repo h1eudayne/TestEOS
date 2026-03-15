@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\MockEOSServer\bin\Debug\questions.csv">
+    <Content Include="..\MockEOSServer\questions.csv">
       <Link>questions.csv</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
