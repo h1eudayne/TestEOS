@@ -106,6 +106,28 @@ namespace MockEOSServer
 
                 Console.WriteLine("[OK] Generated EOS_Server_Info.dat (copy this to EOSClient folder)");
                 Console.WriteLine("     Location: " + Path.GetFullPath(outputFile));
+
+                // Auto-copy to EOSClient output directory
+                try
+                {
+                    string eosClientDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "EOSClient", "bin", "Debug");
+                    eosClientDir = Path.GetFullPath(eosClientDir);
+                    if (Directory.Exists(eosClientDir))
+                    {
+                        string destFile = Path.Combine(eosClientDir, "EOS_Server_Info.dat");
+                        File.Copy(outputFile, destFile, true);
+                        Console.WriteLine("[OK] Auto-copied EOS_Server_Info.dat to EOSClient: " + destFile);
+                    }
+                    else
+                    {
+                        Console.WriteLine("[INFO] EOSClient directory not found at: " + eosClientDir);
+                        Console.WriteLine("[INFO] Please manually copy EOS_Server_Info.dat to EOSClient bin folder.");
+                    }
+                }
+                catch (Exception copyEx)
+                {
+                    Console.WriteLine("[WARNING] Could not auto-copy to EOSClient: " + copyEx.Message);
+                }
             }
             catch (Exception ex)
             {
