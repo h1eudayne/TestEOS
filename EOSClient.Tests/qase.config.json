@@ -12,6 +12,5 @@
     "batch": {
       "size": 100
     }
-  },
-  "debug": false
+  }
 }
