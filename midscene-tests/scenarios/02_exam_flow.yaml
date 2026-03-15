@@ -1,0 +1,77 @@
+# ==============================================================
+# Scenario 02: Exam Flow - Answer & Navigation
+# Tool: Midscene Computer (Desktop Automation)
+# Target: EOSClient.exe - frmEnglishExamClient
+# ==============================================================
+
+# Precondition: Đã login thành công, form thi đã hiển thị
+
+tasks:
+  # ----- TC07: Verify Exam Form hiển thị đúng -----
+  - name: "TC07 - Verify exam form displays correctly"
+    flow:
+      - aiAssert: "The exam form is displayed with title 'EOS Exam Client'"
+      - aiAssert: "The header shows Machine, Student, Server, and Exam Code information"
+      - aiAssert: "The header shows Duration information"
+      - aiAssert: "A countdown timer is visible showing time remaining"
+      - aiAssert: "The tab 'Multiple Choices' is visible"
+      - aiAssert: "Question area shows 'Multiple choices 1/' with total question count"
+      - aiAssert: "Four answer options A, B, C, D are displayed"
+      - aiAssert: "A 'Next' button is visible at the bottom"
+      - aiAssert: "A 'Finish' button is visible in the header area"
+
+  # ----- TC08: Chọn đáp án và chuyển câu hỏi -----
+  - name: "TC08 - Select answer and navigate to next question"
+    flow:
+      - aiAssert: "Question 1 is currently displayed"
+      - ai: "Click on checkbox A to select answer A"
+      - sleep: 500
+      - aiAssert: "Checkbox A is checked"
+      - ai: "Click the Next button"
+      - sleep: 500
+      - aiAssert: "Question 2 is now displayed, showing 'Multiple choices 2/'"
+
+  # ----- TC09: Thay đổi đáp án (radio behavior) -----
+  - name: "TC09 - Change answer selection (only one answer at a time)"
+    flow:
+      - ai: "Click on checkbox A to select answer A"
+      - sleep: 300
+      - aiAssert: "Checkbox A is checked"
+      - ai: "Click on checkbox C to select answer C"
+      - sleep: 300
+      - aiAssert: "Checkbox C is checked"
+      - aiAssert: "Checkbox A is NOT checked"
+
+  # ----- TC10: Navigate qua nhiều câu hỏi -----
+  - name: "TC10 - Navigate through multiple questions"
+    flow:
+      - ai: "Click on checkbox B to select answer B"
+      - ai: "Click the Next button"
+      - sleep: 300
+      - ai: "Click on checkbox D to select answer D"
+      - ai: "Click the Next button"
+      - sleep: 300
+      - ai: "Click on checkbox A to select answer A"
+      - ai: "Click the Next button"
+      - sleep: 300
+      - aiAssert: "The question number has advanced, showing a higher question number"
+
+  # ----- TC11: Verify đáp án được lưu khi quay lại -----
+  - name: "TC11 - Verify answer is saved when navigating back"
+    flow:
+      # Navigate through all questions to wrap around back to first
+      # (Next wraps around: last question -> question 1)
+      - ai: "Keep clicking the Next button until question 1 is displayed again"
+      - sleep: 500
+      - aiAssert: "Question 1 is displayed"
+      - aiAssert: "The previously selected answer checkbox A is still checked"
+
+  # ----- TC12: Timer đang đếm ngược -----
+  - name: "TC12 - Verify countdown timer is running"
+    flow:
+      - aiQuery: "{timeLeft: string}, the current value of the Time Left display"
+        name: time1
+      - sleep: 5000
+      - aiQuery: "{timeLeft: string}, the current value of the Time Left display"
+        name: time2
+      # Nếu timer hoạt động, time2 < time1

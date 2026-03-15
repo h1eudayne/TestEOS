@@ -140,26 +140,9 @@ Thêm vào `.csproj` trước `</Project>`:
 ## Chạy Test
 
 ```powershell
-# Chạy test bình thường (không gửi lên Qase)
 dotnet test
 
-# Chạy test + gửi kết quả lên Qase
 dotnet test --settings qase.runsettings
 ```
 
 ---
-
-## Cấu Trúc Thư Mục
-
-```
-EOSClient.Tests/
-├── EOSClient.Tests.csproj    ← Project file
-├── qase.config.json          ← Cấu hình Qase (API token, project code)
-├── README.md                 ← File này
-└── Tests/
-    ├── CsvQuestionLoaderTests.cs
-    ├── ScoringLogicTests.cs
-    ├── CredentialValidationTests.cs
-    ├── ResultFileOutputTests.cs
-    └── EdgeCasesIntegrationTests.cs
-```

@@ -18,21 +18,6 @@ dotnet --version
 
 Nếu chưa có, tải tại: https://dotnet.microsoft.com/download/dotnet/8.0
 
-## Cấu trúc dự án
-
-```
-EOSClient_source/
-├── EOSClient/              ← App client đăng nhập thi
-├── MockEOSServer/          ← Server giả lập
-├── MockExamClient/         ← Giao diện làm bài thi
-├── QuestionLib/            ← Thư viện câu hỏi (Question, ExamResult...)
-├── EncryptData/            ← Mã hóa dữ liệu
-├── IRemote/                ← Interface giao tiếp client-server
-├── ServerInfoGenerator/    ← Tạo file EOS_Server_Info.dat
-├── EOSClient.Tests/        ← Unit tests (NUnit + Qase)
-├── lib/                    ← DLL bên ngoài (NHibernate, NAudio...)
-└── EOSClient_Full.sln      ← Solution file chính
-```
 
 ## Hướng dẫn Setup
 

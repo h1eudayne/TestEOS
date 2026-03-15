@@ -1,0 +1,84 @@
+# ==============================================================
+# Scenario 01: Login Form Validation - EOS Exam Client
+# Tool: Midscene Computer (Desktop Automation)
+# Target: EOSClient.exe - AuthenticateForm
+# ==============================================================
+
+# Lưu ý: Midscene Computer dùng cho ứng dụng Desktop (WinForms)
+# Cần chạy EOSClient.exe trước khi thực thi script này.
+
+tasks:
+  # ----- TC01: Login với tất cả field trống -----
+  - name: "TC01 - Login with all empty fields"
+    flow:
+      - aiAssert: "The login form is displayed with fields: Exam Code, User Name, Password, Domain, Server"
+      - ai: "Click the Login button"
+      - sleep: 1000
+      - aiAssert: "A message box appears with text 'Please provide an Exam code'"
+      - ai: "Click OK on the message box"
+      - sleep: 500
+
+  # ----- TC02: Login thiếu Username -----
+  - name: "TC02 - Login without Username"
+    flow:
+      - ai: "Type 'NWC202' into the Exam Code field"
+      - ai: "Clear the User Name field"
+      - ai: "Clear the Password field"
+      - ai: "Click the Login button"
+      - sleep: 1000
+      - aiAssert: "A message box appears with text 'Please provide an username'"
+      - ai: "Click OK on the message box"
+      - sleep: 500
+
+  # ----- TC03: Login thiếu Password -----
+  - name: "TC03 - Login without Password"
+    flow:
+      - ai: "Clear and type 'NWC202' into the Exam Code field"
+      - ai: "Clear and type 'student01' into the User Name field"
+      - ai: "Clear the Password field"
+      - ai: "Click the Login button"
+      - sleep: 1000
+      - aiAssert: "A message box appears with text 'Please provide a password'"
+      - ai: "Click OK on the message box"
+      - sleep: 500
+
+  # ----- TC04: Login thiếu Domain -----
+  - name: "TC04 - Login without Domain"
+    flow:
+      - ai: "Clear and type 'NWC202' into the Exam Code field"
+      - ai: "Clear and type 'student01' into the User Name field"
+      - ai: "Clear and type 'pass123' into the Password field"
+      - ai: "Clear the Domain field"
+      - ai: "Click the Login button"
+      - sleep: 1000
+      - aiAssert: "A message box appears with text 'Please provide a domain address'"
+      - ai: "Click OK on the message box"
+      - sleep: 500
+
+  # ----- TC05: Login thiếu Server -----
+  - name: "TC05 - Login without Server selection"
+    flow:
+      - ai: "Clear and type 'NWC202' into the Exam Code field"
+      - ai: "Clear and type 'student01' into the User Name field"
+      - ai: "Clear and type 'pass123' into the Password field"
+      - ai: "Clear and type 'fpt.edu.vn' into the Domain field"
+      - ai: "Clear the Server dropdown selection"
+      - ai: "Click the Login button"
+      - sleep: 1000
+      - aiAssert: "A message box appears with text 'Please provide a server'"
+      - ai: "Click OK on the message box"
+      - sleep: 500
+
+  # ----- TC06: Login với thông tin sai -----
+  - name: "TC06 - Login with invalid credentials"
+    flow:
+      - ai: "Clear and type 'INVALID' into the Exam Code field"
+      - ai: "Clear and type 'wronguser' into the User Name field"
+      - ai: "Clear and type 'wrongpass' into the Password field"
+      - ai: "Clear and type 'fpt.edu.vn' into the Domain field"
+      - ai: "Select the first item in the Server dropdown"
+      - ai: "Click the Login button"
+      - sleep: 3000
+      - aiAssert: "A message box or error dialog appears"
+      - ai: "Click OK on the message box"
+      - sleep: 500

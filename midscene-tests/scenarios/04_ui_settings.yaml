@@ -1,0 +1,42 @@
+# ==============================================================
+# Scenario 04: UI Settings - Font & Volume
+# Tool: Midscene Computer (Desktop Automation)
+# Target: EOSClient.exe - frmEnglishExamClient
+# ==============================================================
+
+# Precondition: Đã login thành công, form thi đã hiển thị
+
+tasks:
+  # ----- TC17: Thay đổi Font chữ -----
+  - name: "TC17 - Change font setting"
+    flow:
+      - aiAssert: "A Font dropdown is visible in the header"
+      - ai: "Click on the Font dropdown and select 'Arial'"
+      - sleep: 500
+      - aiAssert: "The question text font has changed"
+
+  # ----- TC18: Thay đổi Size chữ -----
+  - name: "TC18 - Change font size"
+    flow:
+      - aiAssert: "A Size numeric input is visible in the header"
+      - ai: "Change the Size value to 14 using the numeric up-down control"
+      - sleep: 500
+      - aiAssert: "The question text appears larger"
+
+  # ----- TC19: Thay đổi Volume -----
+  - name: "TC19 - Adjust volume setting"
+    flow:
+      - aiAssert: "A Vol numeric input is visible in the header"
+      - ai: "Change the Vol value to 5 using the numeric up-down control"
+      - sleep: 300
+      - aiAssert: "The Vol value shows 5"
+
+  # ----- TC20: Check Font link trên Login form -----  
+  - name: "TC20 - Check Font link on login form"
+    flow:
+      - aiAssert: "A 'Check Font' link is visible on the login form"
+      - ai: "Click the 'Check Font' link"
+      - sleep: 1000
+      - aiAssert: "A Check Font dialog or window appears"
+      - ai: "Close the Check Font window"
+      - sleep: 500

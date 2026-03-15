@@ -13,17 +13,10 @@
 packages/
 *.nupkg
 
-node_modules/
-tmp_node/
-package-lock.json
-
 build.log
 build_output.txt
 *.log
 tmp_*
-
-EOSClient_23.02.20.26/
-EOSBase/
 
 Thumbs.db
 Desktop.ini

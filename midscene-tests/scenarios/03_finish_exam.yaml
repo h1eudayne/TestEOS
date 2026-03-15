@@ -1,0 +1,66 @@
+# ==============================================================
+# Scenario 03: Finish Exam & Submission
+# Tool: Midscene Computer (Desktop Automation)
+# Target: EOSClient.exe - frmEnglishExamClient
+# ==============================================================
+
+# Precondition: Đã login thành công, form thi đã hiển thị
+
+tasks:
+  # ----- TC13: Finish mà không check "I want to finish" -----
+  - name: "TC13 - Click Finish without checking confirmation checkbox"
+    flow:
+      - aiAssert: "The checkbox 'I want to finish the exam' is NOT checked"
+      - ai: "Click the Finish button"
+      - sleep: 1000
+      - aiAssert: "A warning message box appears with text about checking 'I want to finish the exam'"
+      - ai: "Click OK on the message box"
+      - sleep: 500
+
+  # ----- TC14: Finish exam với confirmation -----
+  - name: "TC14 - Finish exam with confirmation"
+    flow:
+      # Trả lời vài câu trước
+      - ai: "Click on checkbox A to select answer A"
+      - ai: "Click the Next button"
+      - sleep: 200
+      - ai: "Click on checkbox B to select answer B"
+      - ai: "Click the Next button"
+      - sleep: 200
+      - ai: "Click on checkbox C to select answer C"
+      - sleep: 200
+
+      # Check finish checkbox
+      - ai: "Check the 'I want to finish the exam' checkbox"
+      - sleep: 300
+      - aiAssert: "The checkbox 'I want to finish the exam' is checked"
+
+      # Click Finish
+      - ai: "Click the Finish button"
+      - sleep: 1000
+      - aiAssert: "A confirmation dialog appears asking about submitted answers count"
+
+      # Nhấn No để hủy
+      - ai: "Click No on the confirmation dialog"
+      - sleep: 500
+      - aiAssert: "The exam form is still active and timer is still running"
+
+  # ----- TC15: Submit exam thành công -----
+  - name: "TC15 - Submit exam successfully"
+    flow:
+      - ai: "Check the 'I want to finish the exam' checkbox if not already checked"
+      - ai: "Click the Finish button"
+      - sleep: 1000
+      - aiAssert: "A confirmation dialog appears"
+      - ai: "Click Yes on the confirmation dialog"
+      - sleep: 2000
+      - aiAssert: "A success message appears with text 'submitted successfully'"
+
+  # ----- TC16: Verify trạng thái sau khi submit -----
+  - name: "TC16 - Verify state after submission"
+    flow:
+      - ai: "Click OK on the success message"
+      - sleep: 500
+      - aiAssert: "The Finish button is disabled"
+      - aiAssert: "The Next button is disabled"
+      - aiAssert: "The countdown timer has stopped"

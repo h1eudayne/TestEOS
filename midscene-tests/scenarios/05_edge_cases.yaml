@@ -1,0 +1,59 @@
+# ==============================================================
+# Scenario 05: Edge Cases & Negative Tests
+# Tool: Midscene Computer (Desktop Automation)
+# Target: EOSClient.exe
+# ==============================================================
+
+tasks:
+  # ----- TC21: Đóng form thi khi chưa submit -----
+  - name: "TC21 - Close exam form without submitting"
+    flow:
+      - aiAssert: "The exam form is displayed"
+      - ai: "Click the close (X) button on the exam form window"
+      - sleep: 1000
+      - aiAssert: "A warning dialog appears asking if you want to close without submitting"
+      - ai: "Click No to cancel closing"
+      - sleep: 500
+      - aiAssert: "The exam form is still displayed"
+
+  # ----- TC22: Verify Cancel trên Login form -----
+  - name: "TC22 - Verify Cancel button on login form"
+    flow:
+      - aiAssert: "The login form is displayed"
+      - aiAssert: "A Cancel button is visible"
+      # Không thực sự nhấn Cancel vì sẽ đóng ứng dụng
+      # Chỉ verify button tồn tại
+
+  # ----- TC23: Thay đổi Size font đến giá trị cực đại -----
+  - name: "TC23 - Change font size to maximum"
+    flow:
+      - ai: "Change the Size value to 30 using the numeric up-down control"
+      - sleep: 500
+      - aiAssert: "The Size value shows 30"
+      - aiAssert: "The question text is displayed in a very large font"
+
+  # ----- TC24: Thay đổi Size font đến giá trị cực tiểu -----
+  - name: "TC24 - Change font size to minimum"
+    flow:
+      - ai: "Change the Size value to 6 using the numeric up-down control"
+      - sleep: 500
+      - aiAssert: "The Size value shows 6"
+      - aiAssert: "The question text is displayed in a very small font"
+
+  # ----- TC25: Check Sound link khi thiếu file audio -----
+  - name: "TC25 - Check Sound when audio file is missing"
+    flow:
+      - aiAssert: "A 'Check Sound' link is visible on the login form"
+      - ai: "Click the 'Check Sound' link"
+      - sleep: 1000
+      - aiAssert: "A message appears about audio file 'ghosts.mp3' or sound plays"
+      - ai: "Click OK if a message box appeared"
+      - sleep: 500
+
+  # ----- TC26: Wrap around khi đến câu hỏi cuối cùng -----
+  - name: "TC26 - Navigate past last question wraps to first"
+    flow:
+      # Click Next nhiều lần cho đến khi quay lại câu 1
+      - ai: "Keep clicking the Next button repeatedly until the question counter shows question 1 again"
+      - sleep: 500
+      - aiAssert: "Question 1 is displayed, confirming navigation wraps around"
