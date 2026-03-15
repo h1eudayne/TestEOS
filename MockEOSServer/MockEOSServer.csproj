@@ -46,6 +46,12 @@
       <Project>{9313F906-A098-4BC5-AE72-646D2C7ED7FD}</Project>
       <Name>QuestionLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MockExamClient\MockExamClient.csproj">
+      <Project>{C1D2E3F4-A5B6-4C7D-8E9F-0A1B2C3D4E5F}</Project>
+      <Name>MockExamClient</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockRemoteServer.cs" />
@@ -61,4 +67,7 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(SolutionDir)MockExamClient\bin\$(ConfigurationName)\MockExamClient.dll" "$(TargetDir)MockExamClient.dll"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
