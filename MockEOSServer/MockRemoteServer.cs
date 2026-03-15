@@ -128,7 +128,13 @@ namespace MockEOSServer
                     return;
                 }
 
-                string[] lines = File.ReadAllLines(csvPath);
+                string[] lines;
+                using (var fs = new FileStream(csvPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var reader = new StreamReader(fs))
+                {
+                    var allText = reader.ReadToEnd();
+                    lines = allText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                }
                 for (int i = 1; i < lines.Length; i++) // Skip header row
                 {
                     string line = lines[i].Trim();

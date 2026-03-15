@@ -10,12 +10,12 @@ namespace ExamClient
     /// </summary>
     public class Question
     {
-        public string Text { get; set; }
-        public string OptionA { get; set; }
-        public string OptionB { get; set; }
-        public string OptionC { get; set; }
-        public string OptionD { get; set; }
-        public string CorrectAnswer { get; set; } // "A", "B", "C", or "D"
+        public string Text { get; set; } = string.Empty;
+        public string OptionA { get; set; } = string.Empty;
+        public string OptionB { get; set; } = string.Empty;
+        public string OptionC { get; set; } = string.Empty;
+        public string OptionD { get; set; } = string.Empty;
+        public string CorrectAnswer { get; set; } = string.Empty; // "A", "B", "C", or "D"
 
         /// <summary>
         /// Returns all 4 options as a string array.
@@ -32,10 +32,10 @@ namespace ExamClient
     public class QuestionResult
     {
         public int QuestionNumber { get; set; }
-        public string QuestionText { get; set; }
-        public string SelectedAnswer { get; set; } // "A","B","C","D" or "-" (skipped)
-        public string CorrectAnswer { get; set; }
-        public string Status { get; set; } // "CORRECT", "WRONG", "SKIPPED"
+        public string QuestionText { get; set; } = string.Empty;
+        public string SelectedAnswer { get; set; } = string.Empty; // "A","B","C","D" or "-" (skipped)
+        public string CorrectAnswer { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty; // "CORRECT", "WRONG", "SKIPPED"
     }
 
     /// <summary>
@@ -43,8 +43,8 @@ namespace ExamClient
     /// </summary>
     public class ExamResult
     {
-        public string StudentName { get; set; }
-        public string ExamCode { get; set; }
+        public string StudentName { get; set; } = string.Empty;
+        public string ExamCode { get; set; } = string.Empty;
         public DateTime ExamDate { get; set; }
         public int TotalQuestions { get; set; }
         public int Correct { get; set; }
