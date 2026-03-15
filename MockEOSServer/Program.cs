@@ -110,7 +110,17 @@ namespace MockEOSServer
                 // Auto-copy to EOSClient output directory
                 try
                 {
-                    string eosClientDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "EOSClient", "bin", "Debug");
+                    string eosClientDir = Path.Combine(
+                        Path.Combine(
+                            Path.Combine(
+                                Path.Combine(
+                                    Path.Combine(
+                                        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".."),
+                                    ".."),
+                                ".."),
+                            "EOSClient"),
+                        "bin"),
+                    "Debug");
                     eosClientDir = Path.GetFullPath(eosClientDir);
                     if (Directory.Exists(eosClientDir))
                     {
