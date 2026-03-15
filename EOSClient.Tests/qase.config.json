@@ -2,7 +2,7 @@
   "mode": "testops",
   "testops": {
     "api": {
-      "token": "f3ce87c9cbb8a008076ca920fefd486545cdd83f63384a90239b30f09aaae951"
+      "token": ""
     },
     "project": "EOS",
     "run": {
@@ -12,6 +12,5 @@
     "batch": {
       "size": 100
     }
-  },
-  "debug": false
+  }
 }
