@@ -67,7 +67,11 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(SolutionDir)MockExamClient\bin\$(ConfigurationName)\MockExamClient.exe" "$(TargetDir)MockExamClient.dll"</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="CopyMockExamClient" AfterTargets="Build"
+          Condition="Exists('$(ProjectDir)..\MockExamClient\bin\$(Configuration)\MockExamClient.exe')">
+    <Copy SourceFiles="$(ProjectDir)..\MockExamClient\bin\$(Configuration)\MockExamClient.exe"
+          DestinationFiles="$(OutputPath)MockExamClient.dll"
+          SkipUnchangedFiles="true" />
+    <Message Text="[OK] Copied MockExamClient.exe -> $(OutputPath)MockExamClient.dll" Importance="high" />
+  </Target>
 </Project>
