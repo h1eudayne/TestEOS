@@ -68,6 +68,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "$(SolutionDir)MockExamClient\bin\$(ConfigurationName)\MockExamClient.dll" "$(TargetDir)MockExamClient.dll"</PostBuildEvent>
+    <PostBuildEvent>copy /Y "$(SolutionDir)MockExamClient\bin\$(ConfigurationName)\MockExamClient.exe" "$(TargetDir)MockExamClient.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
