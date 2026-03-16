@@ -1,0 +1,43 @@
+name: Run Katalon Tests
+
+on:
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  katalon-test:
+    name: Run Katalon Tests
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Katalon Tests
+        env:
+          KATALON_API_KEY: ${{ secrets.KATALON_API_KEY }}
+        run: |
+          $katalonc = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\katalonc.exe"
+          $projectPath = "${{ github.workspace }}\katalon-autotest\katalon-autotest.prj"
+          $testSuitePath = "Test Suites/EOS All Tests"
+          
+          Write-Host "Running Katalon tests..."
+          Write-Host "Project: $projectPath"
+          Write-Host "Test Suite: $testSuitePath"
+          
+          & $katalonc `
+            -noSplash `
+            -runMode=console `
+            -projectPath="$projectPath" `
+            -testSuitePath="$testSuitePath" `
+            -executionProfile="default" `
+            -browserType="Windows" `
+            -apiKey="$env:KATALON_API_KEY"
+
+      - name: Upload Katalon Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: katalon-reports
+          path: katalon-autotest/Reports/
