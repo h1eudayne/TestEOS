@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WindowsElementEntity>
+   <description>Next button on exam rules dialog</description>
+   <name>btnNext</name>
+   <tag></tag>
+   <locator>btnNext</locator>
+   <locatorStrategy>ACCESSIBILITY_ID</locatorStrategy>
+   <properties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>AutomationId</name>
+      <type>Main</type>
+      <value>btnNext</value>
+      <webElementGuid>b2000001-0001-0001-0001-000000000001</webElementGuid>
+   </properties>
+   <properties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ControlType</name>
+      <type>Main</type>
+      <value>Button</value>
+      <webElementGuid>b2000001-0001-0001-0001-000000000002</webElementGuid>
+   </properties>
+   <properties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>Name</name>
+      <type>Main</type>
+      <value>Next</value>
+      <webElementGuid>b2000001-0001-0001-0001-000000000003</webElementGuid>
+   </properties>
+   <properties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>FrameworkId</name>
+      <type>Main</type>
+      <value>WinForm</value>
+      <webElementGuid>b2000001-0001-0001-0001-000000000004</webElementGuid>
+   </properties>
+</WindowsElementEntity>

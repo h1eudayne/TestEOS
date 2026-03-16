@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>EOS Client Login Test - Full flow from exam rules to login</description>
+   <name>EOS Login Test</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f1a9279d-d683-454e-a22c-0f000bad0b13</testCaseGuid>
+</TestCaseEntity>

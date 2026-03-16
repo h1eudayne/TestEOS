@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WindowsElementEntity>
+   <description>Checkbox agree to exam rules</description>
+   <name>chkAgreeRules</name>
+   <tag></tag>
+   <locator>btnAgree</locator>
+   <locatorStrategy>ACCESSIBILITY_ID</locatorStrategy>
+   <properties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>AutomationId</name>
+      <type>Main</type>
+      <value>btnAgree</value>
+      <webElementGuid>b1000001-0001-0001-0001-000000000001</webElementGuid>
+   </properties>
+   <properties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ControlType</name>
+      <type>Main</type>
+      <value>CheckBox</value>
+      <webElementGuid>b1000001-0001-0001-0001-000000000002</webElementGuid>
+   </properties>
+   <properties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>FrameworkId</name>
+      <type>Main</type>
+      <value>WinForm</value>
+      <webElementGuid>b1000001-0001-0001-0001-000000000003</webElementGuid>
+   </properties>
+</WindowsElementEntity>

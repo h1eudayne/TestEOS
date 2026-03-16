@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectEntity>
+   <description></description>
+   <name>EOSClient_AutoTest</name>
+   <tag></tag>
+   <UUID>00000000-0000-0000-0000-000000000001</UUID>
+   <pageLoadTimeout>30</pageLoadTimeout>
+   <type>WINDOWS</type>
+</ProjectEntity>

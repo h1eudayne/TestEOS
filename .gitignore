@@ -24,3 +24,23 @@ Desktop.ini
 
 **/TestResults/
 *.trx
+
+.gradle
+
+bin
+
+Reports
+
+Libs
+
+output
+
+!output/.gitkeep
+build
+
+.classpath
+
+.project
+
+.cache
+node_modules/
