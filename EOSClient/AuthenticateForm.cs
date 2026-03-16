@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Drawing;
@@ -264,7 +264,7 @@ namespace EOSClient
 				try
 				{
 					string key = "04021976";
-					byte[] buf = EncryptSupport.DecryptQuestions_FromFile(serverInfoFile, key);
+					byte[] buf = EncryptSupport.DecryptQuestions_FromFile(Application.StartupPath + "\\" + serverInfoFile, key);
 					this.si = (ServerInfo)EncryptSupport.ByteArrayToObject(buf);
 					bool flag2 = !this.version.Equals(this.si.Version);
 					if (flag2)
