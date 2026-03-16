@@ -1,3 +1,4 @@
+import com.kms.katalon.core.annotation.BeforeTestCase
 import com.kms.katalon.core.annotation.BeforeTestSuite
 import com.kms.katalon.core.annotation.AfterTestCase
 import com.kms.katalon.core.annotation.AfterTestSuite
@@ -19,28 +20,22 @@ class QaseReporter {
 
     static int runId = 0
     static List<Map> results = []
+    static boolean suiteMode = false
 
     @BeforeTestSuite
     def beforeTestSuite(TestSuiteContext context) {
         println "[QaseReporter] Starting test suite: ${context.getTestSuiteId()}"
+        suiteMode = true
         results.clear()
-        
-        def timestamp = new Date().format("yyyy-MM-dd HH:mm")
-        def body = JsonOutput.toJson([
-            title      : "Katalon Black Box Test - ${timestamp}",
-            is_autotest: true
-        ])
-        
-        try {
-            def response = qasePost("/run/${QASE_PROJECT_CODE}", body)
-            if (response?.result?.id) {
-                runId = response.result.id
-                println "[QaseReporter] Created Qase run #${runId}"
-            } else {
-                println "[QaseReporter] WARNING: Failed to create Qase run. Response: ${response}"
-            }
-        } catch (Exception e) {
-            println "[QaseReporter] ERROR creating Qase run: ${e.message}"
+        createQaseRun()
+    }
+
+    @BeforeTestCase
+    def beforeTestCase(TestCaseContext context) {
+        // If not running via test suite, create Qase run on first test case
+        if (!suiteMode && runId == 0) {
+            println "[QaseReporter] Running single test case - creating Qase run"
+            createQaseRun()
         }
     }
 
@@ -84,10 +79,40 @@ class QaseReporter {
         } catch (Exception e) {
             println "[QaseReporter] ERROR reporting result: ${e.message}"
         }
+
+        // If running single test case (not suite), complete the run after each test
+        if (!suiteMode) {
+            completeQaseRun()
+        }
     }
 
     @AfterTestSuite
     def afterTestSuite(TestSuiteContext context) {
+        completeQaseRun()
+        suiteMode = false
+    }
+
+    static void createQaseRun() {
+        def timestamp = new Date().format("yyyy-MM-dd HH:mm")
+        def body = JsonOutput.toJson([
+            title      : "Katalon Black Box Test - ${timestamp}",
+            is_autotest: true
+        ])
+        
+        try {
+            def response = qasePost("/run/${QASE_PROJECT_CODE}", body)
+            if (response?.result?.id) {
+                runId = response.result.id
+                println "[QaseReporter] Created Qase run #${runId}"
+            } else {
+                println "[QaseReporter] WARNING: Failed to create Qase run. Response: ${response}"
+            }
+        } catch (Exception e) {
+            println "[QaseReporter] ERROR creating Qase run: ${e.message}"
+        }
+    }
+
+    static void completeQaseRun() {
         if (runId > 0) {
             println "[QaseReporter] Completing Qase run #${runId}..."
             try {
@@ -99,7 +124,6 @@ class QaseReporter {
         }
         runId = 0
     }
-
 
     static String mapStatus(String katalonStatus) {
         switch (katalonStatus) {
