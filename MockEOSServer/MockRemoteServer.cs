@@ -31,6 +31,7 @@ namespace MockEOSServer
             EOSData ed = new EOSData();
 
             // Validate credentials against CSV file
+            Console.WriteLine("[DEBUG] Received password: '" + rd.Password + "'");
             if (!ValidateCredentials(rd.ExamCode, rd.Login, rd.Password))
             {
                 Console.WriteLine("[DENIED] Invalid credentials for user: " + rd.Login);

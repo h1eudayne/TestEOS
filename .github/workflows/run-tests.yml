@@ -33,6 +33,10 @@ jobs:
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         env:
           QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
+          QASE_MODE: testops
+          QASE_TESTOPS_PROJECT: EOS
+          QASE_TESTOPS_RUN_TITLE: "EOS CI Test Run - ${{ github.sha }}"
+          QASE_TESTOPS_RUN_COMPLETE: true
         run: dotnet test EOSClient.Tests/EOSClient.Tests.csproj --no-build --configuration Release --logger "trx;LogFileName=test-results.trx"
 
       - name: Create Jira bug if tests fail

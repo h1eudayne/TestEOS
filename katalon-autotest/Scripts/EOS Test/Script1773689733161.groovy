@@ -17,12 +17,10 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-// ★ Dọn dẹp process cũ từ lần test trước
 'taskkill /F /IM EOSClient.exe /T'.execute()
 
 Thread.sleep(2000)
 
-// Step 1: Mở app EOS Client
 Windows.startApplication('C:\\Desktop\\TestEOS\\EOSClient\\bin\\Debug\\EOSClient.exe')
 
 Windows.delay(3)
@@ -33,8 +31,6 @@ Windows.click(findWindowsObject('Object Repository/CheckBox(1)'))
 
 Windows.click(findWindowsObject('Object Repository/Button(2)'))
 
-// ★ QUAN TRỌNG: Chuyển sang cửa sổ Login Form sau khi click Next
-// Dialog "Nội quy kỳ thi" đóng lại, Login Form mở ra là window mới
 Windows.delay(3)
 
 Windows.switchToWindowTitle('EOS Login Form')
@@ -59,14 +55,10 @@ Windows.sendKeys(findWindowsObject('Object Repository/Edit(2)'), 'pass123')
 
 Windows.click(findWindowsObject('Object Repository/Button(3)'))
 
-// Dùng keyboard để chọn server thay vì click ListItem popup
-// Gõ tên server và Enter, hoặc dùng phím Down để chọn
 Windows.delay(1)
 
 Windows.sendKeys(findWindowsObject('Object Repository/Button(3)'), Keys.chord(Keys.DOWN, Keys.ENTER))
 
-// Windows.click(findWindowsObject('Object Repository/Button(4)'))
-// ★ Chuyển sang cửa sổ EOS Exam Client sau khi login thành công
 Windows.delay(5)
 
 Windows.switchToWindowTitle('EOS Exam Client')
