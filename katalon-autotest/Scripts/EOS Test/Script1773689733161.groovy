@@ -21,7 +21,7 @@ import org.openqa.selenium.Keys as Keys
 
 Thread.sleep(2000)
 
-Windows.startApplication('C:\\Desktop\\TestEOS\\EOSClient\\bin\\Debug\\EOSClient.exe')
+Windows.startApplication('D:\\EOSClient_source\\EOSClient\\bin\\Debug\\EOSClient.exe')
 
 Windows.delay(3)
 
