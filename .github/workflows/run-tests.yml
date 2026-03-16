@@ -35,23 +35,12 @@ jobs:
           QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
         run: dotnet test EOSClient.Tests/EOSClient.Tests.csproj --no-build --configuration Release --logger "trx;LogFileName=test-results.trx"
 
-      # -------- lấy tên test fail --------
-      - name: Extract failed test names
-        if: failure()
-        id: failed_tests
-        run: |
-          FAILED=$(grep -oP '(?<=testName=")[^"]+' **/test-results.trx | tr '\n' ', ')
-          echo "FAILED_TESTS=$FAILED" >> $GITHUB_ENV
-
-      # -------- tạo jira bug --------
       - name: Create Jira bug if tests fail
         if: failure()
         env:
           JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
           JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
         run: |
-          CI_LINK="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-
           curl -X POST \
           -u "$JIRA_EMAIL:$JIRA_TOKEN" \
           -H "Content-Type: application/json" \
@@ -61,31 +50,7 @@ jobs:
               \"project\": {
                 \"key\": \"EOS\"
               },
-              \"summary\": \"Automated test failure in CI\",
-              \"description\": {
-                \"type\": \"doc\",
-                \"version\": 1,
-                \"content\": [
-                  {
-                    \"type\": \"paragraph\",
-                    \"content\": [
-                      {
-                        \"type\": \"text\",
-                        \"text\": \"Failing tests: $FAILED_TESTS\"
-                      }
-                    ]
-                  },
-                  {
-                    \"type\": \"paragraph\",
-                    \"content\": [
-                      {
-                        \"type\": \"text\",
-                        \"text\": \"CI run: $CI_LINK\"
-                      }
-                    ]
-                  }
-                ]
-              },
+              \"summary\": \"CI detected failing tests on ${{ github.ref_name }}\",
               \"issuetype\": {
                 \"name\": \"Bug\"
               }
