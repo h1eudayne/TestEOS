@@ -22,6 +22,5 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Test results
 **/TestResults/
 *.trx
