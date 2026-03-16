@@ -14,6 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Clean Katalon workspace metadata
+        run: |
+          # Kill any lingering Katalon processes
+          Stop-Process -Name "katalonc" -Force -ErrorAction SilentlyContinue
+          Stop-Process -Name "katalon" -Force -ErrorAction SilentlyContinue
+          # Clean workspace metadata to prevent "Problem Occurred" dialog
+          $metadataPath = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\config\.metadata"
+          if (Test-Path $metadataPath) {
+            Remove-Item -Path $metadataPath -Recurse -Force -ErrorAction SilentlyContinue
+            Write-Host "Cleaned Katalon workspace metadata"
+          }
+
       - name: Start WinAppDriver
         run: |
           Start-Process "C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe" -PassThru
