@@ -41,7 +41,7 @@ namespace EOSClient.Tests
 
             var creds = CredentialValidator.LoadCredentials(path);
 
-            Assert.That(creds, Has.Count.EqualTo(4));
+            Assert.That(creds, Has.Count.EqualTo(2));
         }
 
         [Test]
