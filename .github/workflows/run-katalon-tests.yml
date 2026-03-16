@@ -39,17 +39,15 @@ jobs:
         run: |
           $katalonc = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\katalonc.exe"
           $projectPath = "${{ github.workspace }}\katalon-autotest\katalon-autotest.prj"
-          $testSuitePath = "Test Suites/EOS All Tests"
           
           Write-Host "Running Katalon tests..."
           Write-Host "Project: $projectPath"
-          Write-Host "Test Suite: $testSuitePath"
           
           & $katalonc `
             -noSplash `
             -runMode=console `
             -projectPath="$projectPath" `
-            -testSuitePath="$testSuitePath" `
+            -testCasePath="Test Cases/EOS Login Test" `
             -executionProfile="default" `
             -browserType="Windows" `
             -apiKey="$env:KATALON_API_KEY"
