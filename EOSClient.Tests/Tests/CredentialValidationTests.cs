@@ -53,7 +53,7 @@ namespace EOSClient.Tests
 
             var creds = CredentialValidator.LoadCredentials(path);
 
-            Assert.That(creds[0].ExamCode, Is.EqualTo("MATH0012"));
+            Assert.That(creds[0].ExamCode, Is.EqualTo("MATH001"));
             Assert.That(creds[0].Username, Is.EqualTo("student1"));
             Assert.That(creds[0].Password, Is.EqualTo("pass123"));
         }
