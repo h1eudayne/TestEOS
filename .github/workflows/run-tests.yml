@@ -35,6 +35,29 @@ jobs:
           QASE_TESTOPS_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
         run: dotnet test EOSClient.Tests/EOSClient.Tests.csproj --no-build --configuration Release --logger "trx;LogFileName=test-results.trx"
 
+      - name: Create Jira bug if tests fail
+        if: failure() 
+        env:
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+        run: |
+          curl -X POST \
+          -u "$JIRA_EMAIL:$JIRA_TOKEN" \
+          -H "Content-Type: application/json" \
+          https://fpt-team-gxvlvsgj.atlassian.net/rest/api/3/issue \
+          -d '{
+            "fields": {
+              "project": {
+                "key": "EOS"
+              },
+              "summary": "Automated test failure in CI",
+              "description": "GitHub Actions detected failing tests.",
+              "issuetype": {
+                "name": "Bug"
+              }
+            }
+          }'
+      
       - name: Run tests (without Qase)
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: dotnet test EOSClient.Tests/EOSClient.Tests.csproj --no-build --configuration Release --logger "trx;LogFileName=test-results.trx"
