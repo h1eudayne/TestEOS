@@ -8,13 +8,13 @@ import groovy.json.JsonSlurper
 
 class QaseReporter {
 
-    static final String QASE_API_TOKEN = 'f3ce87c9cbb8a008076ca920fefd486545cdd83f63384a90239b30f09aaae951'
+    static final String QASE_API_TOKEN = System.getenv('QASE_API_TOKEN') ?: 'f3ce87c9cbb8a008076ca920fefd486545cdd83f63384a90239b30f09aaae951'
     static final String QASE_PROJECT_CODE = 'EOS'
     static final String QASE_API_BASE = 'https://api.qase.io/v1'
     
     static final Map<String, Integer> QASE_CASE_MAPPING = [
-        'EOS Test'       : 0,  // ← Replace 0 with actual Qase case ID
-        'EOS Login Test' : 0   // ← Replace 0 with actual Qase case ID
+        'EOS Test'       : 58,
+        'EOS Login Test' : 59
     ]
 
     static int runId = 0

@@ -17,6 +17,7 @@ jobs:
       - name: Run Katalon Tests
         env:
           KATALON_API_KEY: ${{ secrets.KATALON_API_KEY }}
+          QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
         run: |
           $katalonc = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\katalonc.exe"
           $projectPath = "${{ github.workspace }}\katalon-autotest\katalon-autotest.prj"
