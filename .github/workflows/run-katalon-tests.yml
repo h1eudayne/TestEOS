@@ -14,6 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Start WinAppDriver
+        run: |
+          Start-Process "C:\Program Files\Windows Application Driver\WinAppDriver.exe" -PassThru
+          Start-Sleep -Seconds 3
+          Write-Host "WinAppDriver started"
+
       - name: Run Katalon Tests
         env:
           KATALON_API_KEY: ${{ secrets.KATALON_API_KEY }}
@@ -35,6 +41,12 @@ jobs:
             -executionProfile="default" `
             -browserType="Windows" `
             -apiKey="$env:KATALON_API_KEY"
+
+      - name: Stop WinAppDriver
+        if: always()
+        run: |
+          Stop-Process -Name "WinAppDriver" -Force -ErrorAction SilentlyContinue
+          Write-Host "WinAppDriver stopped"
 
       - name: Upload Katalon Reports
         uses: actions/upload-artifact@v4
