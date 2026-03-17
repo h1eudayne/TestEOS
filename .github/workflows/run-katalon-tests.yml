@@ -48,10 +48,26 @@ jobs:
           QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
         run: |
           $katalonc = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\katalonc.exe"
-          $projectPath = "${{ github.workspace }}\katalon-autotest\katalon-autotest.prj"
+          $projectPath = Join-Path "${{ github.workspace }}" "katalon-autotest\katalon-autotest.prj"
           
-          Write-Host "Running Katalon tests..."
-          Write-Host "Project: $projectPath"
+          Write-Host "=== Debug Info ==="
+          Write-Host "katalonc path: $katalonc"
+          Write-Host "katalonc exists: $(Test-Path $katalonc)"
+          Write-Host "Project path: $projectPath"
+          Write-Host "Project exists: $(Test-Path $projectPath)"
+          Write-Host "Working dir: $(Get-Location)"
+          Write-Host "=================="
+          
+          if (-not (Test-Path $katalonc)) {
+            Write-Host "ERROR: katalonc.exe not found!"
+            exit 1
+          }
+          if (-not (Test-Path $projectPath)) {
+            Write-Host "ERROR: Project file not found!"
+            Write-Host "Listing workspace:"
+            Get-ChildItem "${{ github.workspace }}" -Recurse -Depth 2 | Select-Object FullName
+            exit 1
+          }
           
           & $katalonc `
             -noSplash `
@@ -60,7 +76,8 @@ jobs:
             -testSuitePath="Test Suites/EOS All Tests" `
             -executionProfile="default" `
             -browserType="Windows" `
-            -apiKey="$env:KATALON_API_KEY"
+            -apiKey="$env:KATALON_API_KEY" `
+            -retry=0
 
       - name: Create Jira bug if tests fail
         if: failure()
