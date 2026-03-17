@@ -32,7 +32,6 @@ class QaseReporter {
 
     @BeforeTestCase
     def beforeTestCase(TestCaseContext context) {
-        // If not running via test suite, create Qase run on first test case
         if (!suiteMode && runId == 0) {
             println "[QaseReporter] Running single test case - creating Qase run"
             createQaseRun()

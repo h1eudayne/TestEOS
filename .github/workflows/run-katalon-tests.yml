@@ -7,18 +7,22 @@ on:
 
 jobs:
   katalon-test:
-    name: Run Katalon Tests
+    name: Run Katalon UI Tests
     runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Clean Katalon workspace metadata
+      - name: Clean up old processes
         run: |
-          # Kill any lingering Katalon processes
+          # Kill any lingering processes
           Stop-Process -Name "katalonc" -Force -ErrorAction SilentlyContinue
           Stop-Process -Name "katalon" -Force -ErrorAction SilentlyContinue
+          Stop-Process -Name "EOSClient" -Force -ErrorAction SilentlyContinue
+          Stop-Process -Name "MockEOSServer" -Force -ErrorAction SilentlyContinue
+          Stop-Process -Name "WinAppDriver" -Force -ErrorAction SilentlyContinue
+          Start-Sleep -Seconds 2
           # Clean workspace metadata to prevent "Problem Occurred" dialog
           $metadataPath = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\config\.metadata"
           if (Test-Path $metadataPath) {
@@ -31,6 +35,12 @@ jobs:
           Start-Process "C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe" -PassThru
           Start-Sleep -Seconds 3
           Write-Host "WinAppDriver started"
+
+      - name: Build & Start MockEOSServer
+        run: |
+          Start-Process "D:\EOSClient_source\MockEOSServer\bin\Debug\MockEOSServer.exe" -PassThru
+          Start-Sleep -Seconds 3
+          Write-Host "MockEOSServer started"
 
       - name: Run Katalon Tests
         env:
@@ -47,16 +57,51 @@ jobs:
             -noSplash `
             -runMode=console `
             -projectPath="$projectPath" `
-            -testCasePath="Test Cases/EOS Login Test" `
+            -testSuitePath="Test Suites/EOS All Tests" `
             -executionProfile="default" `
             -browserType="Windows" `
             -apiKey="$env:KATALON_API_KEY"
 
-      - name: Stop WinAppDriver
+      - name: Create Jira bug if tests fail
+        if: failure()
+        env:
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+        run: |
+          $body = @{
+            fields = @{
+              project = @{ key = "EOS" }
+              summary = "Katalon UI tests failed on ${{ github.ref_name }} - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+              issuetype = @{ name = "Bug" }
+              description = @{
+                type = "doc"
+                version = 1
+                content = @(@{
+                  type = "paragraph"
+                  content = @(@{
+                    type = "text"
+                    text = "Katalon UI tests failed. Commit: ${{ github.sha }}. Branch: ${{ github.ref_name }}. Check GitHub Actions for details."
+                  })
+                })
+              }
+            }
+          } | ConvertTo-Json -Depth 10
+
+          $headers = @{
+            "Content-Type" = "application/json"
+            "Authorization" = "Basic $([Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("$env:JIRA_EMAIL`:$env:JIRA_TOKEN")))"
+          }
+          
+          Invoke-RestMethod -Uri "https://fpt-team-gxvlvsgj.atlassian.net/rest/api/3/issue" -Method Post -Headers $headers -Body $body
+          Write-Host "Jira bug created"
+
+      - name: Stop services
         if: always()
         run: |
           Stop-Process -Name "WinAppDriver" -Force -ErrorAction SilentlyContinue
-          Write-Host "WinAppDriver stopped"
+          Stop-Process -Name "MockEOSServer" -Force -ErrorAction SilentlyContinue
+          Stop-Process -Name "EOSClient" -Force -ErrorAction SilentlyContinue
+          Write-Host "All services stopped"
 
       - name: Upload Katalon Reports
         uses: actions/upload-artifact@v4
@@ -64,3 +109,4 @@ jobs:
         with:
           name: katalon-reports
           path: katalon-autotest/Reports/
+
