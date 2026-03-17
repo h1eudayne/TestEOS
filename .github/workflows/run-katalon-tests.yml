@@ -47,29 +47,18 @@ jobs:
           KATALON_API_KEY: ${{ secrets.KATALON_API_KEY }}
           QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
         run: |
-          $katalonc = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\katalonc.exe"
+          # Dùng katalon.exe (Studio free) thay vì katalonc.exe (KRE trả phí)
+          $katalon = "C:\Users\lenovo\.katalon\packages\KS-11.0.1\katalon.exe"
           $projectPath = Join-Path "${{ github.workspace }}" "katalon-autotest\katalon-autotest.prj"
           
           Write-Host "=== Debug Info ==="
-          Write-Host "katalonc path: $katalonc"
-          Write-Host "katalonc exists: $(Test-Path $katalonc)"
+          Write-Host "katalon path: $katalon"
+          Write-Host "katalon exists: $(Test-Path $katalon)"
           Write-Host "Project path: $projectPath"
           Write-Host "Project exists: $(Test-Path $projectPath)"
-          Write-Host "Working dir: $(Get-Location)"
           Write-Host "=================="
           
-          if (-not (Test-Path $katalonc)) {
-            Write-Host "ERROR: katalonc.exe not found!"
-            exit 1
-          }
-          if (-not (Test-Path $projectPath)) {
-            Write-Host "ERROR: Project file not found!"
-            Write-Host "Listing workspace:"
-            Get-ChildItem "${{ github.workspace }}" -Recurse -Depth 2 | Select-Object FullName
-            exit 1
-          }
-          
-          & $katalonc `
+          & $katalon `
             -noSplash `
             -runMode=console `
             -projectPath="$projectPath" `
